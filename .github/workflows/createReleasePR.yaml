@@ -21,7 +21,7 @@ jobs:
 
       - name: Create or Update PR to Main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CREATE_RELEASE_PR_TOKEN }}
         run: |
           PR_TITLE="${{ github.event.pull_request.title }}"
           PR_URL="${{ github.event.pull_request.html_url }}"
