@@ -37,6 +37,6 @@ jobs:
             # 既存のPRの説明を取得
             existing_description=$(gh pr view $existing_pr --json body -q .body)
             # 既存のPRの説明を更新
-            updated_description=(printf "$existing_description\n- [$PR_TITLE]($PR_URL)")
+            updated_description=$(printf "$existing_description\n- [$PR_TITLE]($PR_URL)")
             gh pr edit $existing_pr --body "$updated_description"
           fi
