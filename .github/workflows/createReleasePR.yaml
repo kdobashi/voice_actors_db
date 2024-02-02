@@ -30,13 +30,13 @@ jobs:
           existing_pr=$(gh pr list --base main --head develop --state open --json number --jq '.[0].number')
 
           if [ -z "$existing_pr" ]; then
-            description=$(printf PRs for Release:\n- [$PR_TITLE]($PR_URL))
+            description=$(printf "PRs for Release:\n- [$PR_TITLE]($PR_URL)")
             # 新しいPRを作成し、説明にマージされたPRの情報を含める
             gh pr create --base main --head develop --title "Release PR from Develop to Main" --body "$description"
           else
             # 既存のPRの説明を取得
             existing_description=$(gh pr view $existing_pr --json body -q .body)
             # 既存のPRの説明を更新
-            updated_description=(printf "$existing_description\n- [$PR_TITLE]($PR_URL))"
+            updated_description=(printf "$existing_description\n- [$PR_TITLE]($PR_URL)")
             gh pr edit $existing_pr --body "$updated_description"
           fi
