@@ -10,14 +10,19 @@ jobs:
   createOrUpdateReleasePR:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup GitHub CLI
         run: |
-          sudo apt update
-          sudo apt install gh
+          if gh --version; then
+            echo "GitHub CLI is already installed."
+          else
+            sudo apt update
+            sudo apt install gh
+          fi
 
       - name: Create or Update PR to Main
         env:
